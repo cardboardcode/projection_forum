@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+
+{% block head_title %}
+Hanasayo | {{ block.super }}
+{% endblock %}
+
+
+
+
+<style>
+{% block style %}
+.navbar-static-top{
+    margin-bottom:0px !important;
+    
+}
+
+.jumbotron{
+    background-color:#841e1e;
+    color:#FFF;
+}
+{% endblock %}
+</style>
+
+
+
+
+{% block jumbotron %}
+
+<div class="jumbotron">
+<div class="container">
+     <div class = "row">
+              <div class='col-sm-6'>
+              <h1>Come Join The Projection Community!</h1>
+              <p>Projection is about getting the idea. It doesn't matter what portfolio, doesn't matter whether you are the smartest scientist or the most inspirational artist. Ideas can come from different people of different walks of life and the strength of the idea will carry itself through. This is what this forum is here for.</p>
+
+              <p>
+              <a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}" role="button">Join Us &raquo;</a>
+              </p>
+              </div>
+              <div class='col-sm-6 '>
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/AuzGW3AIpd0" frameborder="0" allowfullscreen></iframe>
+              </div>
+              </div>
+     </div>
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<h1>You are logged in!</h1>
+
+{{ queryset }}
+{% else %}
+<div class="row">
+  <div class="col-xs-3 pull-right">
+             <p class='lead text-align-center'>{{ title }}</p>
+
+             <form method ='POST' action=''>{% csrf_token %}
+             {{form|crispy }}
+             <input class='btn btn-primary' type = 'submit' value='Sign Up' />
+             </form>
+  </div>
+
+  <div class = 'col-sm-3'>
+  <p class='lead text-align-center'>Built with Django &amp; Bootstrap
+  <br/>
+<span class="fa-stack fa-lg fa-4x">
+  <i class="fa fa-circle-o-notch fa-stack-2x fa-spin "></i>
+  <i class="fa fa-circle-o-notch fa-stack-1x fa-spin fa-flip-horizontal"></i>
+</span></p>
+  </div>
+
+  <div class = 'col-sm-3'>
+  <p class='lead text-align-center'>Created for The Better Of Humanity <br/>
+<span class="fa-stack fa-lg fa-4x">
+  <i class="fa fa-circle-o-notch fa-stack-2x fa-spin "></i>
+  <i class="fa fa-circle-o-notch fa-stack-1x fa-spin fa-flip-horizontal"></i>
+</span>
+  </p>
+  
+  </div>
+
+  <div class = 'col-sm-3'>
+  <p class='lead text-align-center'>Always Orbital
+  <br/><br/>
+<span class="fa-stack fa-lg fa-4x">
+  <i class="fa fa-circle-o-notch fa-stack-2x fa-spin "></i>
+  <i class="fa fa-circle-o-notch fa-stack-1x fa-spin fa-flip-horizontal"></i>
+</span></p>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
