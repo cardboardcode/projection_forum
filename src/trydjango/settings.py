@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'registration',
     #my own apps
     'newsletter',
+    'openedprojects',
+    'closedprojects',
+    'involvedprojects',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -1,0 +1,32 @@
+
+{% load staticfiles %}
+<div class="row">
+  <div class="col-xs-6 col-sm-4">
+		<div class="panel panel-default">
+		  <div class=" lead panel-body" style='background-color: grey'>
+		    <a href="{% url 'closedgenres' %}">
+		    Closed Projects
+		    </a>
+		  </div>
+		</div>
+  </div>
+  <div class="col-xs-6 col-sm-4">
+  	<div class="panel panel-default">
+		  <div class=" lead panel-body" style='background-color: pink'>
+		  <a href="{% url 'openedgenres' %}">
+		    Opened Projects
+		    </a>
+		  </div>
+		</div>
+  </div>
+  
+  <div class="clearfix visible-xs-block"></div>
+  <div class="col-xs-6 col-sm-4">
+  	<div class="panel panel-default">
+		  <div class=" lead panel-body" style='background-color: blue'>
+		    Involved Projects
+		  </div>
+		</div>
+  </div>
+</div>
+

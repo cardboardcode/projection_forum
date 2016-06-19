@@ -30,6 +30,11 @@ Hanasayo | {{ block.super }}
 
 {% block jumbotron %}
 
+{% if request.user.is_authenticated %}
+<h1 class='lead text-align-center'>[LOGGED IN: JUMBOTRON IRRELEVANT]<img src="{% static 'img/Combined.png' %}"/></h1>
+
+
+{% else %}
 <div class="jumbotron">
 <div class="container">
      <div class = "row">
@@ -48,6 +53,7 @@ Hanasayo | {{ block.super }}
      </div>
 
 </div>
+{% endif %}
 {% endblock %}
 
 
@@ -58,9 +64,9 @@ Hanasayo | {{ block.super }}
 
 {% block content %}
 {% if request.user.is_authenticated %}
-<h1>You are logged in!</h1>
-
-{{ queryset }}
+<h1>--------------------------------------------------</h1>
+{% include 'inside.html'%}
+{# {{ queryset }} #}
 {% else %}
 <div class="row">
   <div class="col-xs-3 pull-right">

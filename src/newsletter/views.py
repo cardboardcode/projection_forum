@@ -40,7 +40,7 @@ def home(request):
         }
      if request.user.is_authenticated and request.user.is_staff:
         context = {
-          "queryset": [123,456]
+          "queryset": "Authentication confirmed. Welcome back, sir."
         }
      return render(request, "home.html",context)
 
