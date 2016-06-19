@@ -28,9 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cardboardmails@gmail.com'
-EMAIL_HOST_PASSWORD = 's9435571j'
-EMAIL_PORT = 8000
+EMAIL_HOST_USER = 'projectionbot@gmail.com'
+EMAIL_HOST_PASSWORD = 'orbital2016'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 '''
