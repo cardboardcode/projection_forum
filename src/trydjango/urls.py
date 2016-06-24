@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^posts/', include("openedprojects.urls", namespace = 'posts')),
     url(r'^$','newsletter.views.home', name='home'),
     url(r'^contact/$','newsletter.views.contact', name='contact'),
     url(r'^about/$','trydjango.views.about', name='about'),
@@ -30,10 +31,10 @@ urlpatterns = [
     
     url(r'^closedprojects/','closedprojects.views.closedgenres', name='closedgenres'),
     url(r'^closed_subcategories/','closedprojects.views.closed_subcategories', name='closed_subcategories'),
-   
+]   
 
 
-]
+
 #Inefficient Method (Get rid of these two lines during production where DEBUG = False)
 if settings.DEBUG:
 	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
