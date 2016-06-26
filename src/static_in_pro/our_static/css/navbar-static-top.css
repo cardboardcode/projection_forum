@@ -1,11 +1,13 @@
+{% load staticfiles %}
+
 body {
   min-height: 2000px;
 }
 
 .navbar-static-top {
   margin-bottom: 19px;
-  background-color: #841e1e;
-  border-color: #1A5F23;
+  background-color: #a9cfa9;
+  border-color:#c2ffbe;
 }
 
 .navbar-default .navbar-brand{
@@ -25,5 +27,6 @@ body {
 }
 
 .navbar-toggle{
-	background-color: #841e1e !important;
+	background-color: #c2ffbe !important;
+	
 }

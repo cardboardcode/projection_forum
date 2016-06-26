@@ -19,7 +19,7 @@ Hanasayo | {{ block.super }}
 }
 
 .jumbotron{
-    background-color:#841e1e;
+    background-color:#5e8452;
     color:#FFF;
 }
 {% endblock %}
@@ -31,7 +31,7 @@ Hanasayo | {{ block.super }}
 {% block jumbotron %}
 
 {% if request.user.is_authenticated %}
-<h1 class='lead text-align-center'>[LOGGED IN: JUMBOTRON IRRELEVANT]<img src="{% static 'img/Combined.png' %}"/></h1>
+<h1 class='lead text-align-center'></h1>
 
 
 {% else %}
@@ -65,7 +65,7 @@ Hanasayo | {{ block.super }}
 
 {% block content %}
 {% if request.user.is_authenticated %}
-<h1>--------------------------------------------------</h1>
+
 {% include 'inside.html'%}
 {# {{ queryset }} #}
 {% else %}
