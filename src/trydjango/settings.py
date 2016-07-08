@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     #third party apps
     'crispy_forms',
     'registration',
+    'pagedown',
     #my own apps
+    'comments',
     'newsletter',
     'openedprojects',
     'closedprojects',
