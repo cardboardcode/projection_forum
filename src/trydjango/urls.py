@@ -21,6 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include("openedprojects.urls", namespace = 'posts')),
+    url(r'^comments/', include("comments.urls", namespace = 'comments')),
     url(r'^$','newsletter.views.home', name='home'),
     url(r'^contact/$','newsletter.views.contact', name='contact'),
     url(r'^about/$','trydjango.views.about', name='about'),
