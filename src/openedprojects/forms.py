@@ -2,7 +2,7 @@ from django import forms
 
 from pagedown.widgets import PagedownWidget
 
-from .models import Post
+from .models import Post, Category
 
 class PostForm(forms.ModelForm):
 	content = forms.CharField(widget = PagedownWidget)
@@ -11,5 +11,6 @@ class PostForm(forms.ModelForm):
 		fields = [
 			"title",
 			"content",
-			"image"
+			"image",
+			"category"
 		]

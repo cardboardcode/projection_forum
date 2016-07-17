@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from comments.forms import CommentForm
 from comments.models import Comment
 from .forms import PostForm
-from .models import Post
+from .models import Post, Category
 
 # Create your views here.
 def post_create(request):
@@ -79,8 +79,9 @@ def post_detail(request, slug=None):
 	}
 	return render(request, "post_detail.html", context)
 
-def post_list(request):
-	queryset_list = Post.objects.all()#.order_by("-timestamp")
+def post_list(request, category_name_slug):
+	category = Category.objects.get(slug = category_name_slug)
+	queryset_list = Post.objects.filter(category = category)#.order_by("-timestamp")
 	query = request.GET.get("q")
 	if query:
 		queryset_list = queryset_list.filter(
@@ -102,7 +103,7 @@ def post_list(request):
 
 	context ={
 		"object_list": queryset,
-		"title":"List",
+		"title": category,
 		"page_request_var": page_request_var
 	}
 	return render(request, "post_list.html", context)
@@ -144,3 +145,47 @@ def opened_subcategories (request):
 	"queryset": "Test Message.."
 	}
 	return render (request, 'opened_subcategory.html', context)
+
+def show_category(request, category_name_slug):
+	context_dict = {}
+
+	try:
+		category = Category.objects.get(slug=category_name_slug)
+		posts = Post.objects.filter(category=category)
+		query = request.GET.get("q")
+		if query:
+			posts = posts.filter(
+				Q(title__icontains=query) |
+				Q(content__icontains=query) |
+				Q(user__username__icontains=query)
+				).distinct()
+		paginator = Paginator(posts, 10)
+		page_request_var = "page"
+		page = request.GET.get('page')
+		try:
+			queryset = paginator.page(page)
+		except PageNotAnInteger:
+			# If page is not an integer, deliver first page.
+			queryset = paginator.page(1)
+		except EmptyPage:
+			# If page is out of range (e.g. 9999), deliver last page of results.
+			queryset = paginator.page(paginator.num_pages)
+		
+		context_dict['posts'] = posts
+		context_dict['category'] = category
+		context_dict['page_request_var'] = page_request_var
+		context_dict['object_list'] = queryset
+	except Category.DoesNotExist:
+
+		context_dict['category'] = None
+		context_dict['pages'] = None
+
+	return render(request, 'testing.html', context_dict)
+
+
+
+def categories(request):
+	category_list = Category.objects.all()
+	context_dict = {'categories': category_list}
+	
+	return render(request, 'categories.html', context_dict)
