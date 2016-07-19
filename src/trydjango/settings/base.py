@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'registration',
     'pagedown',
+    'django_messages',
     #my own apps
     'comments',
     'newsletter',
