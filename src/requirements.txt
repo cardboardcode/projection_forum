@@ -4,6 +4,7 @@ gunicorn==19.4.5
 psycopg2==2.6.1
 whitenoise==2.0.6
 django-crispy-forms==1.6.0
+django-messages==0.5.3
 django-pagedown==0.1.1
 django-registration-redux==1.4
 Pillow==3.2.0
