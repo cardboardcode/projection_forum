@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^contact/$','newsletter.views.contact', name='contact'),
     url(r'^about/$','trydjango.views.about', name='about'),
     url(r'^accounts/', include('registration.backends.default.urls')),
-
+    url(r'^messages/', include('django_messages.urls')),
     #Testing
     url(r'^categories/', 'openedprojects.views.categories', name = 'categories'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/', "openedprojects.views.show_category", name = 'posts'),

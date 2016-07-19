@@ -14,6 +14,11 @@ from .forms import PostForm
 from .models import Post, Category
 
 # Create your views here.
+
+def display_hiddenforum(request):
+
+	return render(request, 'testing.html')
+
 def post_create(request):
 	if not request.user.is_authenticated():
 		raise Http404
@@ -70,7 +75,9 @@ def post_detail(request, slug=None):
 
 	comments = instance.comments
 	
+	slugtest = slug
 	context = {
+	"slugtest": slugtest,
 	"title": instance.title,
 	"instance": instance,
 	"share_string": share_string,
@@ -189,3 +196,49 @@ def categories(request):
 	context_dict = {'categories': category_list}
 	
 	return render(request, 'categories.html', context_dict)
+
+def display_hidden(request,slug=None):
+	instance = get_object_or_404(Post, slug=slug)
+	share_string = quote_plus(instance.content)
+
+	initial_data = {
+		"content_type": instance.get_content_type,
+		"object_id": instance.id
+	}
+	form = CommentForm(request.POST or None, initial = initial_data)
+	if form.is_valid():
+		c_type = form.cleaned_data.get("content_type")
+		content_type = ContentType.objects.get(model = c_type)
+		obj_id = form.cleaned_data.get("object_id")
+		content_data = form.cleaned_data.get("content")
+		parent_obj = None
+
+		try:
+			parent_id = int(request.POST.get("parent_id"))
+		except:
+			parent_id = None
+
+		if parent_id:
+			parent_qs = Comment.objects.filter(id = parent_id)
+			if parent_qs.exists() and parent_qs.count() == 1:
+				parent_obj = parent_qs.first()
+
+		new_comment, created = Comment.objects.get_or_create(
+			user = request.user,
+			content_type = content_type,
+			object_id = obj_id,
+			content = content_data,
+			parent = parent_obj,
+			)
+		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+
+	comments = instance.comments
+	
+	context = {
+	"title": instance.title,
+	"instance": instance,
+	"share_string": share_string,
+	"comments": comments,
+	"comment_form": form
+	}
+	return render(request,'testing.html',context)
